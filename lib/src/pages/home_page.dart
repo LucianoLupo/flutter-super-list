@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: _crearBottomNavigationBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.filter_center_focus),
+        child: Icon(Icons.add),
         onPressed: () {
           Navigator.pushNamed(
             context,

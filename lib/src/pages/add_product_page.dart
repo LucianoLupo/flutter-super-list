@@ -39,67 +39,67 @@ class _AddProductPageState extends State<AddProductPage> {
         body: ListView(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(5.0),
-              child: Text('Settings',
-                  style:
-                      TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold)),
-            ),
-            Divider(),
-            Container(
+              margin: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[200]),
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
-                controller: _textController,
                 decoration: InputDecoration(
-                  labelText: 'Nombre',
-                  helperText: 'Nombre del Producto',
-                ),
+                    border: InputBorder.none, hintText: 'Nombre'),
                 onChanged: (value) {
                   name = value;
                 },
               ),
             ),
-            Divider(),
             Container(
+              margin: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[200]),
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 decoration: InputDecoration(
-                  labelText: 'Descripción',
-                  helperText: 'Descripción del Producto',
-                ),
+                    border: InputBorder.none, hintText: 'Descripción'),
                 onChanged: (value) {
                   description = value;
                 },
               ),
             ),
-            Divider(),
             Container(
+              margin: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[200]),
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Cantidad Esperada',
-                  helperText: 'Cantidad Esperada',
-                ),
+                    border: InputBorder.none, hintText: 'Por Comprar'),
                 onChanged: (value) {
                   expectedQuantity = int.parse(value);
                 },
               ),
             ),
-            Divider(),
             Container(
+              margin: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[200]),
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Cantidad Comprada',
-                  helperText: 'Cantidad Comprada',
-                ),
+                    border: InputBorder.none, hintText: 'Comprado'),
                 onChanged: (value) {
                   purchasedQuantity = int.parse(value);
                 },
               ),
             ),
-            Divider(),
             Container(
               child: createButton(context),
             )
