@@ -16,10 +16,10 @@ class _AddProductPageState extends State<AddProductPage> {
 
   int id;
   String uuid;
-  int expectedQuantity;
-  int purchasedQuantity;
-  String name;
-  String description;
+  int expectedQuantity = 10;
+  int purchasedQuantity = 0;
+  String name = "producto";
+  String description = "description";
 
   TextEditingController _textController;
 
