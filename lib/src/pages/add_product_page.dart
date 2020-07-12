@@ -44,23 +44,33 @@ class _AddProductPageState extends State<AddProductPage> {
               ),
               title: Text(
                 'Agregar Producto',
+                textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black87),
               ),
+              centerTitle: true,
               backgroundColor: Colors.transparent,
               elevation: 0.0,
             ),
             body: ListView(
-              shrinkWrap: true,
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(
                       left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
                   decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.07),
+                          spreadRadius: 5,
+                          blurRadius: 10,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[200]),
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      color: Colors.grey[100]),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextField(
-                    style: TextStyle(fontSize: 22.0),
+                    style: TextStyle(fontSize: 18.0),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Nombre',
@@ -74,11 +84,20 @@ class _AddProductPageState extends State<AddProductPage> {
                   margin: const EdgeInsets.only(
                       left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
                   decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.07),
+                          spreadRadius: 5,
+                          blurRadius: 10,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[200]),
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      color: Colors.grey[100]),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   child: TextField(
-                    style: TextStyle(fontSize: 22.0),
+                    style: TextStyle(fontSize: 18.0),
                     decoration: InputDecoration(
                         border: InputBorder.none, hintText: 'Descripción'),
                     onChanged: (value) {
@@ -86,51 +105,67 @@ class _AddProductPageState extends State<AddProductPage> {
                     },
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(
-                      left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[200]),
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: 'Por Comprar'),
-                    onChanged: (value) {
-                      expectedQuantity = int.parse(value);
-                    },
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                      left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey[200]),
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: 'Comprado'),
-                    onChanged: (value) {
-                      purchasedQuantity = int.parse(value);
-                    },
-                  ),
-                ),
                 Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(
-                          left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.grey[200]),
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text("allalalal"),
+                  children: <Widget>[
+                    Flexible(
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            left: 20.0, right: 0, top: 20.0, bottom: 5.0),
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.07),
+                                spreadRadius: 5,
+                                blurRadius: 10,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey[100]),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18.0),
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              border: InputBorder.none, hintText: 'Comprado'),
+                          onChanged: (value) {
+                            purchasedQuantity = int.parse(value);
+                          },
+                        ),
+                      ),
                     ),
-                    Text("HOLA"),
-                    Text("HOLA"),
+                    Flexible(
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            left: 20.0, right: 20, top: 20.0, bottom: 5.0),
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.07),
+                                spreadRadius: 5,
+                                blurRadius: 10,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey[100]),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18.0),
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Por Comprar'),
+                          onChanged: (value) {
+                            expectedQuantity = int.parse(value);
+                          },
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Container(
@@ -148,11 +183,45 @@ class _AddProductPageState extends State<AddProductPage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        FlatButton(
-          child: Text('Agregar Producto'),
-          onPressed: () {
-            _addProduct(context);
-          },
+        Container(
+          margin: const EdgeInsets.only(
+              left: 20.0, right: 20, top: 30.0, bottom: 5.0),
+          height: 50.0,
+          child: RaisedButton(
+            onPressed: () => _addProduct(context),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(80.0)),
+            padding: EdgeInsets.all(0.0),
+            child: Ink(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromRGBO(50, 215, 95, 1),
+                      Color.fromRGBO(50, 215, 95, 1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.07),
+                      spreadRadius: 5,
+                      blurRadius: 10,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(20.0)),
+              child: Container(
+                constraints: BoxConstraints(minHeight: 50.0),
+                alignment: Alignment.center,
+                child: Text(
+                  "Agregar Producto",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );

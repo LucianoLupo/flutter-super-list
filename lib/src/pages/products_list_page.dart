@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:super_list/src/bloc/products_bloc.dart';
 import 'package:super_list/src/providers/db_provider.dart';
+import 'package:super_list/src/utils/double_circular_notched.dart';
 
 class ProductsListPage extends StatelessWidget {
   final productsBloc = new ProductsBloc();
@@ -23,50 +24,73 @@ class ProductsListPage extends StatelessWidget {
                   color: Colors.black87,
                 ),
               ),
+              titleSpacing: 20.0,
               actions: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Color.fromRGBO(0, 0, 0, 0.3),
+                Padding(
+                  padding: EdgeInsets.only(right: 10.0),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      color: Color.fromRGBO(0, 0, 0, 0.3),
+                    ),
+                    onPressed: () => {},
                   ),
-                  onPressed: () => {},
                 )
               ],
               backgroundColor: Colors.transparent,
               elevation: 0.0,
             ),
             body: _productsListBody(),
-            bottomNavigationBar: new BottomAppBar(
-              notchMargin: 3.0,
-              shape: CircularNotchedRectangle(),
-              clipBehavior: Clip.antiAlias,
-              color: Colors.red,
-              child: new Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.delete_forever,
-                      color: Colors.white,
+            bottomNavigationBar: Container(
+              height: 50,
+              child: BottomAppBar(
+                notchMargin: 4.0,
+                shape: DoubleCircularNotchedButton(), //changed to new class
+                clipBehavior: Clip.antiAlias,
+                color: Color.fromRGBO(255, 255, 255, 1),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    'Productos',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                      fontSize: 20.0,
                     ),
-                    onPressed: () => _showMyDialog(context),
-                  )
-                ],
+                  ),
+                ),
               ),
             ),
             floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  'new_product',
-                );
-              },
-              child: new Icon(Icons.add),
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
+                FloatingActionButtonLocation.endDocked,
+
+            floatingActionButton: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 32),
+                  child: FloatingActionButton(
+                    heroTag: "deleteButton",
+                    onPressed: () => _showMyDialog(context),
+                    child: new Icon(Icons.delete),
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black87,
+                  ),
+                ),
+                FloatingActionButton(
+                  heroTag: "addProductButton",
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      'new_product',
+                    );
+                  },
+                  child: new Icon(Icons.add),
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
+                )
+              ],
             ),
 
             //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -104,7 +128,7 @@ class ProductsListPage extends StatelessWidget {
         }
 
         _containerColor(ProductModel product) {
-          if (product.purchasedQuantity >= 0) {
+          if (product.purchasedQuantity > 0) {
             double counter =
                 product.purchasedQuantity / product.expectedQuantity;
             double delta = exp(-10 * exp(-6 * counter));
@@ -115,8 +139,30 @@ class ProductsListPage extends StatelessWidget {
                 ((255 - (255 - 215) * delta)).toInt(),
                 ((255 - (255 - 95) * delta)).toInt(),
                 1);
+          } else if (product.purchasedQuantity > 0) {
+            return Colors.grey[100];
           }
-          return Colors.grey[100];
+          double counter =
+              -product.purchasedQuantity / product.expectedQuantity;
+          double delta = exp(-10 * exp(-6 * counter));
+          //print(
+          //    '${product.id} === ${product.purchasedQuantity / product.expectedQuantity} === ${delta} === ${(255 - (255 - 50) * delta)}, ${(255 - (255 - 215 * delta))},${(255 - (255 - 95 * delta))}');
+          return Color.fromRGBO(
+              ((255 - (255 - 245) * delta)).toInt(),
+              ((255 - (255 - 65) * delta)).toInt(),
+              ((255 - (255 - 65) * delta)).toInt(),
+              1);
+        }
+
+        _sentimentIcon(ProductModel product) {
+          if (product.purchasedQuantity <= 0) {
+            return Icon(Icons.sentiment_dissatisfied, size: 48);
+          } else if (product.purchasedQuantity < product.expectedQuantity / 2) {
+            return Icon(Icons.sentiment_neutral, size: 48);
+          } else if (product.purchasedQuantity < product.expectedQuantity) {
+            return Icon(Icons.sentiment_satisfied, size: 48);
+          }
+          return Icon(Icons.sentiment_very_satisfied, size: 48);
         }
 
         return ListView.builder(
@@ -127,7 +173,8 @@ class ProductsListPage extends StatelessWidget {
                 productsBloc.deleteProduct(products[i].id),
             child: Center(
               child: Container(
-                margin: const EdgeInsets.only(top: 20.0, bottom: 5.0),
+                margin: const EdgeInsets.only(
+                    top: 20.0, bottom: 5.0, left: 20.0, right: 20.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: _containerColor(products[i]),
@@ -141,13 +188,12 @@ class ProductsListPage extends StatelessWidget {
                   ],
                 ),
                 height: 80,
-                width: 375,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Icon(Icons.account_circle, size: 48),
+                      _sentimentIcon(products[i]),
                       SizedBox(width: 12),
                       Expanded(
                         child: Column(
