@@ -33,78 +33,115 @@ class _AddProductPageState extends State<AddProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Agregar Producto'),
-        ),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(
-                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey[200]),
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Nombre'),
-                onChanged: (value) {
-                  name = value;
-                },
+      body: Stack(
+        children: <Widget>[
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: new AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black87, size: 26.0),
+                onPressed: () => Navigator.of(context).pop(),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey[200]),
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Descripción'),
-                onChanged: (value) {
-                  description = value;
-                },
+              title: Text(
+                'Agregar Producto',
+                style: TextStyle(color: Colors.black87),
               ),
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey[200]),
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Por Comprar'),
-                onChanged: (value) {
-                  expectedQuantity = int.parse(value);
-                },
-              ),
+            body: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(
+                      left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[200]),
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    style: TextStyle(fontSize: 22.0),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Nombre',
+                    ),
+                    onChanged: (value) {
+                      name = value;
+                    },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                      left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[200]),
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    style: TextStyle(fontSize: 22.0),
+                    decoration: InputDecoration(
+                        border: InputBorder.none, hintText: 'Descripción'),
+                    onChanged: (value) {
+                      description = value;
+                    },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                      left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[200]),
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: InputBorder.none, hintText: 'Por Comprar'),
+                    onChanged: (value) {
+                      expectedQuantity = int.parse(value);
+                    },
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                      left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[200]),
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: InputBorder.none, hintText: 'Comprado'),
+                    onChanged: (value) {
+                      purchasedQuantity = int.parse(value);
+                    },
+                  ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.grey[200]),
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Text("allalalal"),
+                    ),
+                    Text("HOLA"),
+                    Text("HOLA"),
+                  ],
+                ),
+                Container(
+                  child: createButton(context),
+                )
+              ],
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                  left: 20.0, right: 20.0, top: 20.0, bottom: 5.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey[200]),
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Comprado'),
-                onChanged: (value) {
-                  purchasedQuantity = int.parse(value);
-                },
-              ),
-            ),
-            Container(
-              child: createButton(context),
-            )
-          ],
-        ));
+          )
+        ],
+      ),
+    );
   }
 
   Widget createButton(BuildContext context) {
@@ -132,15 +169,11 @@ class _AddProductPageState extends State<AddProductPage> {
 
       if (Platform.isIOS) {
         Future.delayed(Duration(milliseconds: 750), () {
-          //utils.abrirScan(context, product);
+          Navigator.of(context).pop();
         });
       } else {
-        //utils.abrirScan(context, product);
+        Navigator.of(context).pop();
       }
-      Navigator.pushNamed(
-        context,
-        'products',
-      );
     }
   }
 }

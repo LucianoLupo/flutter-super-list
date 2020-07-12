@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Super List',
       initialRoute: 'products',
       routes: {
-        'home': (BuildContext context) => HomePage(),
+        "/": (BuildContext context) => HomePage(),
         'products': (BuildContext context) => ProductsListPage(),
         'new_product': (BuildContext context) => AddProductPage(),
       },
