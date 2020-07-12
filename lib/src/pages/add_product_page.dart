@@ -16,18 +16,14 @@ class _AddProductPageState extends State<AddProductPage> {
 
   int id;
   String uuid;
-  int expectedQuantity = 10;
-  int purchasedQuantity = 0;
-  String name = "producto";
-  String description = "description";
-
-  TextEditingController _textController;
+  int expectedQuantity;
+  int purchasedQuantity;
+  String name;
+  String description;
 
   @override
   void initState() {
     super.initState();
-
-    _textController = new TextEditingController(text: '');
   }
 
   @override
@@ -186,8 +182,9 @@ class _AddProductPageState extends State<AddProductPage> {
         Container(
           margin: const EdgeInsets.only(
               left: 20.0, right: 20, top: 30.0, bottom: 5.0),
-          height: 50.0,
+          height: 80.0,
           child: RaisedButton(
+            color: Colors.transparent,
             onPressed: () => _addProduct(context),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(80.0)),
@@ -202,17 +199,9 @@ class _AddProductPageState extends State<AddProductPage> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.07),
-                      spreadRadius: 5,
-                      blurRadius: 10,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
                   borderRadius: BorderRadius.circular(20.0)),
               child: Container(
-                constraints: BoxConstraints(minHeight: 50.0),
+                constraints: BoxConstraints(minHeight: 60.0),
                 alignment: Alignment.center,
                 child: Text(
                   "Agregar Producto",
