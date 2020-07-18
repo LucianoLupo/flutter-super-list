@@ -111,6 +111,7 @@ class ProductsListBody extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text('${products[i].name}',
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600)),
