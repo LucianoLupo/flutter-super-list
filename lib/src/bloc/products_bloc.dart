@@ -25,23 +25,26 @@ class ProductsBloc {
     _productsController.sink.add(await DBProvider.db.getAllProducts());
   }
 
+  searchProducts(String name) async {
+    _productsController.sink.add(await DBProvider.db.getProductsByName(name));
+  }
+
   addProduct(ProductModel product) async {
     await DBProvider.db.newProduct(product);
     getProducts();
   }
 
-  updateProduct(ProductModel product) async {
+  updateProduct(ProductModel product, callback) async {
     await DBProvider.db.updateProduct(product);
-    getProducts();
+    callback();
   }
 
-  deleteProduct(int id) async {
+  deleteProduct(int id, callback) async {
     await DBProvider.db.deleteProduct(id);
-    getProducts();
+    callback();
   }
 
   deleteAllProducts() async {
     await DBProvider.db.deleteAllProducts();
-    getProducts();
   }
 }

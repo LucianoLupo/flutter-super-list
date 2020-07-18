@@ -51,6 +51,18 @@ class DBProvider {
     return res.isNotEmpty ? ProductModel.fromJson(res.first) : null;
   }
 
+  Future<List<ProductModel>> getProductsByName(String name) async {
+    final db = await database;
+    final res = name.length > 0
+        ? await db.query('Products',
+            where: 'name LIKE ? ', whereArgs: ['%${name.toUpperCase()}%'])
+        : await db.query('Products', where: 'name = ?', whereArgs: [name]);
+
+    List<ProductModel> list =
+        res.isNotEmpty ? res.map((c) => ProductModel.fromJson(c)).toList() : [];
+    return list;
+  }
+
   Future<List<ProductModel>> getAllProducts() async {
     final db = await database;
     final res = await db.query('Products');
